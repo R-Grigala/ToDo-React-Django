@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Header from '../Header/Header';
 import Todo from './Todo';
 import TodoForm from './TodoForm'
 
@@ -43,6 +44,8 @@ const TodoList = () => {
   } 
 
   return (
+    <>
+    <Header />
     <div className='container'>
       <h1>Add Your Daily Tasks</h1>
       <TodoForm onSubmit={addTodo}/>
@@ -53,6 +56,7 @@ const TodoList = () => {
       updateTodo={updateTodo}
       />
     </div>
+  </>
   )
 }
 

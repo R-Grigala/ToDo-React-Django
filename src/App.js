@@ -1,12 +1,10 @@
 import './App.css';
-import Header from './components/Header/Header';
-import TodoList from './components/ToDo/TodoList';
+import Singup from './components/Singup/Singup';
 
 function App() {
   return (
     <div>
-      <Header />
-      <TodoList />
+      <Singup />
     </div>
   );
 }
