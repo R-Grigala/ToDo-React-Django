@@ -42,6 +42,20 @@ const handleSubmit = e => {
 
     setInput('');
 }
+const [todos, setTodos] = useState([]);
+
+// ToDo-ჩამონათვალში ახალი task-ის დამატება
+const addTodo = todo => {
+  // Task-ის ტექსტში არასაჭირო space-ების ამოშლა 
+  if(!todo.text || /^\s*$/.test(todo.text)){
+    return
+  }
+
+  const newTodos = [todo, ...todos]
+
+  setTodos(newTodos);
+  console.log(todo, ...todos);
+};
 
   return (
     <div className="container-singup">
@@ -67,7 +81,7 @@ const handleSubmit = e => {
             onChange={handleChange}
             ref={inputRef}
         />
-        <button className='singin-button'>Sing In</button>
+        <button className='singin-button' onSubmit={addTodo}>Sing In</button>
       </div>      
     </div>
   );
