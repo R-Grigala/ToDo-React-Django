@@ -21,7 +21,8 @@ const Singup = () => {
   }
 
   return (
-    <div>      
+    <div className="container-singup">
+      <div className="update-img"></div>      
       <Avatar
         width={122}
         height={122}
