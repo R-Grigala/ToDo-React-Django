@@ -1,13 +1,33 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef} from "react";
 import Avatar from "react-avatar-edit"
+import { Link } from 'react-router-dom'
+import TodoList from "../ToDo/TodoList";
+import './singIn.css'
 
 
-const Singup = (props) => {
+const Singup = () => {
 
+  const avatar = useRef();
+  const localAvatar = localStorage.getItem("avatar");
   const [preview, setPreview] = useState(null);
-  const [input, setInput] = useState('');
 
-  const inputRef = useRef(null)
+
+  const [showHome,setShowHome]=useState(false)
+  const [show,setShow]=useState(false)
+
+  const name = useRef();
+  const localName = localStorage.getItem("name");
+  const localSignUp=localStorage.getItem("signUp")
+
+  useEffect(()=>{
+    if(localSignUp){
+        setShowHome(true)
+    }
+    if(localName){
+        setShow(true)
+    }
+   })
+
 
   function onClose() {
     setPreview(null);
@@ -24,41 +44,22 @@ const Singup = (props) => {
     }
   }
 
-  useEffect(() => {
-    inputRef.current.focus()
-})
+  const handleClick = () => {
+    
+    if(name.current.value){
+      localStorage.setItem("name", name.current.value)
+      console.log(name.current.value)
+    }
+  };
 
-const handleChange = e => {
-    setInput(e.target.value);
-};
-
-const handleSubmit = e => {
-    e.preventDefault();
-
-    props.onSubmit({
-        id: Math.floor(Math.random() * 10000),
-        text: input
-    });
-
-    setInput('');
-}
-const [todos, setTodos] = useState([]);
-
-// ToDo-ჩამონათვალში ახალი task-ის დამატება
-const addTodo = todo => {
-  // Task-ის ტექსტში არასაჭირო space-ების ამოშლა 
-  if(!todo.text || /^\s*$/.test(todo.text)){
-    return
-  }
-
-  const newTodos = [todo, ...todos]
-
-  setTodos(newTodos);
-  console.log(todo, ...todos);
-};
-
+  const handleSignIn = () => {
+    if(name.current.value===localName){
+        localStorage.setItem("signUp",name.current.value)
+    }
+   }
   return (
-    <div className="container-singup">
+    <div className="container-singin">
+      {showHome?<TodoList/>: <Link to='/singin'/>}
       <div className="update-img">
         <Avatar
           width={122}
@@ -70,18 +71,19 @@ const addTodo = todo => {
         />
         {preview && <img src={preview} alt="Preview" />}
       </div>
-      <div onSubmit={handleSubmit}>
-        <h3>fill in you name</h3>
-        <input
-            type='text' 
-            placeholder='my task' 
-            value={input} 
-            name="text"
-            className='todo-input' 
-            onChange={handleChange}
-            ref={inputRef}
-        />
-        <button className='singin-button' onSubmit={addTodo}>Sing In</button>
+      <div>
+        <form>
+          <h3>fill in you name</h3>
+          <input
+              type='text' 
+              placeholder='your name' 
+              name="text"
+              className='todo-input' 
+              onChange={handleClick}
+              ref={name}
+          />
+          <button className='singin-button' onSubmit={handleSignIn}>Sing In</button>
+        </form>
       </div>      
     </div>
   );
