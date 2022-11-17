@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Avatar from "react-avatar-edit"
 
-const Singup = () => {
+
+const Singup = (props) => {
 
   const [preview, setPreview] = useState(null);
+  const [input, setInput] = useState('');
+
+  const inputRef = useRef(null)
 
   function onClose() {
     setPreview(null);
@@ -20,6 +24,25 @@ const Singup = () => {
     }
   }
 
+  useEffect(() => {
+    inputRef.current.focus()
+})
+
+const handleChange = e => {
+    setInput(e.target.value);
+};
+
+const handleSubmit = e => {
+    e.preventDefault();
+
+    props.onSubmit({
+        id: Math.floor(Math.random() * 10000),
+        text: input
+    });
+
+    setInput('');
+}
+
   return (
     <div className="container-singup">
       <div className="update-img">
@@ -33,7 +56,18 @@ const Singup = () => {
         />
         {preview && <img src={preview} alt="Preview" />}
       </div>
-      <div className="singin">
+      <div onSubmit={handleSubmit}>
+        <h3>fill in you name</h3>
+        <input
+            type='text' 
+            placeholder='my task' 
+            value={input} 
+            name="text"
+            className='todo-input' 
+            onChange={handleChange}
+            ref={inputRef}
+        />
+        <button className='singin-button'>Sing In</button>
       </div>      
     </div>
   );
