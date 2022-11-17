@@ -22,16 +22,19 @@ const Singup = () => {
 
   return (
     <div className="container-singup">
-      <div className="update-img"></div>      
-      <Avatar
-        width={122}
-        height={122}
-        onCrop={onCrop}
-        onClose={onClose}
-        onBeforeFileLoad={onBeforeFileLoad}
-        src={null}
-      />
-      {preview && <img src={preview} alt="Preview" />}
+      <div className="update-img">
+        <Avatar
+          width={122}
+          height={122}
+          onCrop={onCrop}
+          onClose={onClose}
+          onBeforeFileLoad={onBeforeFileLoad}
+          src={null}
+        />
+        {preview && <img src={preview} alt="Preview" />}
+      </div>
+      <div className="singin">
+      </div>      
     </div>
   );
 }

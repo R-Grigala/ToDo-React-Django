@@ -1,10 +1,10 @@
 import './App.css';
-import Singup from './components/Singup/Singup';
+import SingIn from './components/Singup/SingIn';
 
 function App() {
   return (
     <div>
-      <Singup />
+      <SingIn />
     </div>
   );
 }
