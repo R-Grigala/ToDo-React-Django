@@ -1,18 +1,11 @@
-import './App.css';
-import Layout from './components/Layout/Layout';
+import RoutesLib from "./RoutesLib"
 
 function App() {
-  // return (
-  //   <>
-  //   <Routes>
-  //     <Route path="/" element={<Home />}/>
-  //     <Route path="/singin" element={<SingIn />}/>
-  //     <Route path="/todo" element={<TodoList />}/>
-  //   </Routes>
-  //   </>
-  // );
-
-  return <Layout />
+  return (
+    <>
+      <RoutesLib />
+    </>
+  );
 }
 
 export default App;

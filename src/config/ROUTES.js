@@ -1,26 +1,23 @@
-import Home from "../pages/Home";
-import SingUp from "../pages/SingUp";
-import ToDo from "../pages/ToDo";
+import { ToDo, SignIn, GetStarted } from "../pages/index.js";
 import GuestGuard from "../components/GuestGuard"
 import AuthGuard from "../components/AuthGuard"
 
 
-
 const ROUTES = {
-    HOME: "/",
-    SINGUP: "signup",
+    GETSTARTED: "/",
+    SIGNIN: "signin",
     TODO: "todo",
 };
 
 const ROUTES_CONFIG = [
     {
-        path: ROUTES.HOME,
+        path: ROUTES.GETSTARTED,
         guard: GuestGuard,
-        page: Home
+        page: GetStarted
     }, {
-        path: ROUTES.SINGUP,
+        path: ROUTES.SIGNIN,
         guard: GuestGuard,
-        page: SingUp
+        page: SignIn
     }, {
         path: ROUTES.TODO,
         guard: AuthGuard,

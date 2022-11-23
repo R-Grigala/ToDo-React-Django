@@ -1,91 +1,83 @@
-import React, { useState, useEffect, useRef} from "react";
-import Avatar from "react-avatar-edit"
-import { Link } from 'react-router-dom'
-import TodoList from "../components/ToDo/TodoList";
+import AddIMG from "../assets/images/add_photo.svg"
+import { useContext, useRef } from "react"
+import { useNavigate } from "react-router-dom"
+import Routers from "../routers/Routers"
+import { AppContext } from "../context/AppContext"
+import { AuthContext } from "../context/AuthContext"
 
+function SingUp() {
+    const { name, setName, img, setImg } = useContext(AppContext)
+    const { setIsAuthenticated } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const uploadFileInput = useRef(null);
 
-const SingUp = () => {
-
-  const avatar = useRef();
-  const localAvatar = localStorage.getItem("avatar");
-  const [preview, setPreview] = useState(null);
-
-
-  const [showHome,setShowHome]=useState(false)
-  const [show,setShow]=useState(false)
-
-  const name = useRef();
-  const localName = localStorage.getItem("name");
-  const localSignUp=localStorage.getItem("signUp")
-
-  useEffect(()=>{
-    if(localSignUp){
-        setShowHome(true)
+    const uploadImg = () => {
+        uploadFileInput.current.click();
     }
-    if(localName){
-        setShow(true)
+
+    const imgFilehandler = (e) => {
+        if (e.target.files.length !== 0) {
+            setImg(URL.createObjectURL(e.target.files[0]));
+        }
+    };
+
+    const isUploaded = () => {
+        if (img.length === 0) {
+            return false
+        }
+        return true
     }
-   })
 
-
-  function onClose() {
-    setPreview(null);
-  }
-
-  function onCrop(pv) {
-    setPreview(pv);
-  }
-
-  function onBeforeFileLoad(elem) {
-    if (elem.target.files[0].size > 71680) {
-      alert("File is too big!");
-      elem.target.value = "";
+    const signInButton = () => {
+        if (isUploaded() && name.length >= 4) {
+            localStorage.setItem("USER_IMG", JSON.stringify(img))
+            localStorage.setItem("USER_NAME", JSON.stringify(name))
+            localStorage.setItem("IS_AUTHENTICATED", "1")
+            setIsAuthenticated(true);
+            navigate(`/${Routers.TODO}`);
+        } else {
+            alert("INFO!")
+        }
     }
-  }
 
-  const handleClick = () => {
-    
-    if(name.current.value){
-      localStorage.setItem("name", name.current.value)
-      console.log(name.current.value)
-    }
-  };
+    return (
+        <section className='sm:bg-black text-center  sm:pt-8 pb-10'>
+            <main className='bg-white max-w-xl mx-auto pt-8 sm:rounded px-8 pb-8 sm:px-10'>
+                <h1 className='font-semibold text-[40px] sm:text-[48px] mb-6 sm:mb-10'>Get Started</h1>
+                {!isUploaded() ? <span className='text-[22px] block mb-2'>add a photo</span> : ''}
 
-  const handleSignIn = () => {
-    if(name.current.value===localName){
-        localStorage.setItem("signUp",name.current.value)
-    }
-   }
-  return (
-    <div className="container-singin">
-      {showHome?<TodoList/>: <Link to='/singin'/>}
-      <div className="update-img">
-        <Avatar
-          width={122}
-          height={122}
-          onCrop={onCrop}
-          onClose={onClose}
-          onBeforeFileLoad={onBeforeFileLoad}
-          src={null}
-        />
-        {preview && <img src={preview} alt="Preview" />}
-      </div>
-      <div>
-        <form>
-          <h3>fill in you name</h3>
-          <input
-              type='text' 
-              placeholder='your name' 
-              name="text"
-              className='todo-input' 
-              onChange={handleClick}
-              ref={name}
-          />
-          <button className='singin-button' onSubmit={handleSignIn}>Sing In</button>
-        </form>
-      </div>      
-    </div>
-  );
+                <input
+                    ref={uploadFileInput}
+                    type='file'
+                    className="hidden"
+                    onChange={imgFilehandler}
+                ></input>
+
+                {isUploaded()
+                    ? <div>
+                        <img alt="camera" className='w-[100px] h-[100px] mx-auto rounded-full' src={img} />
+                        <button className="mt-2 text-sm hover:text-main-green" onClick={uploadImg}> Change Image</button>
+                    </div>
+                    : <button onClick={uploadImg} className="block mx-auto bg-main-gray hover:bg-main-green p-8 rounded-full">
+                        <img alt="camera" src={AddIMG} />
+                    </button>
+                }
+                <span className='text-[22px] block mt-6 sm:mt-12 mb-4'>fill in you name</span>
+                <form onSubmit={signInButton}>
+                    <input
+                        placeholder='your name'
+                        className='bg-main-gray w-full h-[76px] px-6'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    ></input>
+                    <button
+                        type="submit"
+                        className='bg-main-green hover:bg-black hover:text-white text-[32px] block mx-auto  px-16 sm:px-20 mt-8 mb-4 sm:mt-16 rounded'
+                    >Sign In</button>
+                </form>
+            </main>
+        </section>
+    );
 }
 
-export default SingUp
+export default SingUp;
