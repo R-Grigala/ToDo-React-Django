@@ -1,11 +1,11 @@
-import AddIMG from "../assets/images/add_photo.svg"
+import AddIMG from "../img/addimg.png"
 import { useContext, useRef } from "react"
 import { useNavigate } from "react-router-dom"
-import Routers from "../routers/Routers"
+import ROUTES from "../config/ROUTES"
 import { AppContext } from "../context/AppContext"
 import { AuthContext } from "../context/AuthContext"
 
-function SingUp() {
+function SignIn() {
     const { name, setName, img, setImg } = useContext(AppContext)
     const { setIsAuthenticated } = useContext(AuthContext)
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ function SingUp() {
             localStorage.setItem("USER_NAME", JSON.stringify(name))
             localStorage.setItem("IS_AUTHENTICATED", "1")
             setIsAuthenticated(true);
-            navigate(`/${Routers.TODO}`);
+            navigate(`/${ROUTES.TODO}`);
         } else {
             alert("INFO!")
         }
@@ -80,4 +80,4 @@ function SingUp() {
     );
 }
 
-export default SingUp;
+export default SignIn;
