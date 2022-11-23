@@ -1,7 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-section {
+.section {
     font-family: 'Poppins';
+    background: #000;
 }
