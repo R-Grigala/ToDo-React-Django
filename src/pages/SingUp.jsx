@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef} from "react";
 import Avatar from "react-avatar-edit"
 import { Link } from 'react-router-dom'
-import TodoList from "../ToDo/TodoList";
-import './singIn.css'
+import TodoList from "../components/ToDo/TodoList";
 
 
-const Singup = () => {
+const SingUp = () => {
 
   const avatar = useRef();
   const localAvatar = localStorage.getItem("avatar");
@@ -89,4 +88,4 @@ const Singup = () => {
   );
 }
 
-export default Singup
+export default SingUp
