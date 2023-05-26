@@ -24,3 +24,18 @@ class TaskList(APIView):
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
     
+class TaskDetail(APIView):
+    def get(self, request, pk):
+        task = Task.objects.get(task_id=pk)
+        serializer = TaskSerializer(task, many=False)
+        return Response(serializer.data)
+    
+class TaskCreate(APIView):
+    def post(self, request):
+        serializer = TaskSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+        return Response(serializer.data)
+    
