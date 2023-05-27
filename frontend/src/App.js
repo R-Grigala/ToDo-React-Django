@@ -8,7 +8,7 @@ class App extends React.Component {
       this.state = {
         todoList:[],
         activeItem:{
-          id:null,
+          task_id:null,
           title:'',
           completed:false,
         },
@@ -80,7 +80,7 @@ class App extends React.Component {
     var url = 'http://127.0.0.1:8000/api/task-create/'
 
     if(this.state.editing === true){
-      url = `http://127.0.0.1:8000/api/task-update/${ this.state.activeItem.id}/`
+      url = `http://127.0.0.1:8000/api/task-update/${ this.state.activeItem.task_id}/`
       this.setState({
         editing:false
       })
