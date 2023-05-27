@@ -99,7 +99,7 @@ class App extends React.Component {
         this.fetchTasks()
         this.setState({
            activeItem:{
-          id:null, 
+          task_id:null, 
           title:'',
           completed:false,
         }
@@ -121,7 +121,7 @@ class App extends React.Component {
   deleteItem(task){
     var csrftoken = this.getCookie('csrftoken')
 
-    fetch(`http://127.0.0.1:8000/api/task-delete/${task.id}/`, {
+    fetch(`http://127.0.0.1:8000/api/task-delete/${task.task_id}/`, {
       method:'DELETE',
       headers:{
         'Content-type':'application/json',
@@ -138,7 +138,7 @@ class App extends React.Component {
 
     task.completed = !task.completed
     var csrftoken = this.getCookie('csrftoken')
-    var url = `http://127.0.0.1:8000/api/task-update/${task.id}/`
+    var url = `http://127.0.0.1:8000/api/task-update/${task.task_id}/`
 
       fetch(url, {
         method:'POST',
