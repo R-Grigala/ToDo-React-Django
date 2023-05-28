@@ -1,17 +1,22 @@
-#1 python3 -m venv env
+#1 Create a virtual environment
+    python3 -m venv env
 
-#2 source env/bin/activate
-#3 pip3 install -r requirements.txt
-#4 
-    python3 manage.py makemigrations
-    python3 manage.py migrate
-    python3 manage.py createsuperuser
+#2 Activate the virtual environment
+    source env/bin/activate
 
-#5
-    cd frontend 
-    npm install
-    npm run bild
+#3 Install Python dependencies
+    pip3 install -r requirements.txt
 
-#6
-    cd ..
-    python3 manage.py runserver
+#4 Run Django database migrations and create a superuser
+    python3 manage.py makemigrations  # Create database migrations
+    python3 manage.py migrate  # Apply migrations to the database
+    python3 manage.py createsuperuser  # Create a superuser for the Django admin
+
+#5 Install frontend dependencies and build the React app
+    cd frontend  # Navigate to the frontend directory
+    npm install  # Install Node.js dependencies
+    npm run build  # Build the React app
+
+#6 Run the Django development server
+    cd ..  # Navigate back to the project root directory
+    python3 manage.py runserver  # Start the Django development server
