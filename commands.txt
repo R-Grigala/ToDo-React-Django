@@ -1,0 +1,17 @@
+#1 python3 -m venv env
+
+#2 source env/bin/activate
+#3 pip3 install -r requirements.txt
+#4 
+    python3 manage.py makemigrations
+    python3 manage.py migrate
+    python3 manage.py createsuperuser
+
+#5
+    cd frontend 
+    npm install
+    npm run bild
+
+#6
+    cd ..
+    python3 manage.py runserver

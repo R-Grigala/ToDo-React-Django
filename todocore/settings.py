@@ -90,27 +90,27 @@ WSGI_APPLICATION = 'todocore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-DB_NAME = config('DB_NAME')
-DB_USER = config('DB_USER')
-DB_PASSWORD =config('DB_PASSWORD')
-
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': DB_NAME,  # Set to True if you want to enforce the database schema
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': f'mongodb+srv://{DB_USER}:{DB_PASSWORD}@ofdigital.dx57iu1.mongodb.net/?retryWrites=true&w=majority',  # Replace with your MongoDB connection URL
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DB_NAME = config('DB_NAME')
+# DB_USER = config('DB_USER')
+# DB_PASSWORD =config('DB_PASSWORD')
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': DB_NAME,  # Set to True if you want to enforce the database schema
+#         'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': f'mongodb+srv://{DB_USER}:{DB_PASSWORD}@ofdigital.dx57iu1.mongodb.net/?retryWrites=true&w=majority',  # Replace with your MongoDB connection URL
+#         }
+#     }
+# }
 
 
 # Password validation
